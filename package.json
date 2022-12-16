@@ -1,5 +1,5 @@
 {
-  "name": "woodnstone_next",
+  "name": "woodnstone-next-adminjs-multer-cloudinary-mongo",
   "version": "0.0.1",
   "description": "Project for a Webshop selling handmade products based on natural materials.",
   "scripts": {
@@ -12,6 +12,7 @@
     "start:frontend": "npm run dev -w frontend",
     "start:backend": "npm run start -w backend",
     "start:admin": "npm run start -w admin",
+    "deploy": "git add . && git commit -m Build && git push",
     "prettier": "prettier --write **/*.{js,ts,css,scss,jsx,tsx}"
   },
   "author": "Kevin Kötz (https://github.com/KevinKoetz)",
