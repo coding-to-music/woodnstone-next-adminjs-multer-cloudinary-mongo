@@ -1,10 +1,10 @@
-# XXXXXXXXXXXXXXX
+# woodnstone-next-adminjs-multer-cloudinary-mongo
 
-# 🚀 DESCRIPTION_GOES_HERE 🚀
+# 🚀 eCommerce app made with NextJS, AdminJS Multer Cloudinary and MongoDB 🚀
 
-https://github.com/coding-to-music/XXXXXXXXXXXXXXX
+https://github.com/coding-to-music/woodnstone-next-adminjs-multer-cloudinary-mongo
 
-https://XXXXXXXXXXXXXXX.vercel.app
+https://woodnstone-next-adminjs-multer-cloudinary-mongo.vercel.app
 
 From / By https://github.com/KevinKoetz/woodnstone_next
 
@@ -24,7 +24,7 @@ git add .
 git remote remove origin
 git commit -m "first commit"
 git branch -M main
-git remote add origin git@github.com:coding-to-music/XXXXXXXXXXXXXXX.git
+git remote add origin git@github.com:coding-to-music/woodnstone-next-adminjs-multer-cloudinary-mongo.git
 git push -u origin main
 ```
 # woodnstone_next
