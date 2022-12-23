@@ -22,10 +22,10 @@
     "admin"
   ],
   "devDependencies": {
-    "concurrently": "^7.0.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.4",
-    "prettier": "^2.5.1"
+    "concurrently": "^7.6.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1"
   },
   "husky": {
     "hooks": {
