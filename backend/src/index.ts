@@ -1,14 +1,14 @@
+import api from "./api";
+import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config({ path: "./.env.local" });
 import express from "express";
 import mongoose from "mongoose";
-import api from "./api";
 import passport from "passport";
-import cors from "cors";
+dotenv.config({ path: "../.env" });
 
-if (!process.env.MONGO_DB) throw new Error("env: MONGO_DB not defined.");
+if (!process.env.MONGO_URI) throw new Error("env: MONGO_URI not defined.");
 mongoose
-  .connect(process.env.MONGO_DB)
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to DB!"))
   .catch((err) => {
     console.log("DB connection Error:", err);
@@ -18,7 +18,7 @@ mongoose
 const PORT = process.env.PORT || 4000;
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(passport.initialize());
 app.use(api);
 app.listen(PORT, () => {

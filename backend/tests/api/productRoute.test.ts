@@ -1,19 +1,20 @@
-import dotenv from "dotenv";
-dotenv.config({ path: "./.env.local" });
-
+import { File, FormData } from "formdata-node";
 import express, { Express } from "express";
-import mongoose from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
-import { Server } from "http";
-import axios from "axios";
-import passport from "passport";
-import productRoute from "../../src/api/productRoute";
+
 import { AddressInfo } from "net";
-import Product from "../../src/models/Product";
-import { FormData, File } from "formdata-node";
 import { Buffer } from "buffer";
 import { FormDataEncoder } from "form-data-encoder";
+import { MongoMemoryServer } from "mongodb-memory-server";
+import Product from "../../src/models/Product";
 import { Readable } from "stream";
+import { Server } from "http";
+import axios from "axios";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import passport from "passport";
+import productRoute from "../../src/api/productRoute";
+dotenv.config({ path: "../.env" });
+
 
 let mongo: MongoMemoryServer;
 let app: Express;
@@ -102,7 +103,6 @@ describe("the product route should", () => {
 
     //Adding all the entries to the form Data
     Object.entries(product).forEach((entry) => form.set(entry[0], entry[1]));
-
 
     form.append("images", {
       type: "image/png",
