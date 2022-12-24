@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import passport from "passport";
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: "./.env.local" });
+
+mongoose.set("strictQuery", false);
 
 if (!process.env.MONGO_URI) throw new Error("env: MONGO_URI not defined.");
 mongoose
@@ -23,4 +25,5 @@ app.use(passport.initialize());
 app.use(api);
 app.listen(PORT, () => {
   console.log("App listening on Port:", PORT);
+  console.log("App listening on http://localhost:", PORT);
 });

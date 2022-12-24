@@ -1,14 +1,15 @@
 import {
-  Schema,
-  model,
-  Model,
   Document,
-  Query,
-  Types,
   LeanDocument,
+  Model,
+  Query,
+  Schema,
+  Types,
+  model,
 } from "mongoose";
-import crypto from "crypto";
+
 import { User } from "../../../types";
+import crypto from "crypto";
 
 const keyLength = 16;
 const hashLength = 64;
@@ -19,15 +20,19 @@ const scryptOptions = {
 };
 
 const fakeSalt = crypto.randomBytes(keyLength);
-const fakePassword = [fakeSalt.toString("base64"), crypto.scryptSync(
+const fakePassword = [
   fakeSalt.toString("base64"),
-  fakeSalt,
-  hashLength,
-  scryptOptions
-).toString("base64")]
+  crypto
+    .scryptSync(
+      fakeSalt.toString("base64"),
+      fakeSalt,
+      hashLength,
+      scryptOptions
+    )
+    .toString("base64"),
+];
 
-interface InstanceMethods {
-}
+interface InstanceMethods {}
 
 interface QueryHelpers {
   byEmail(name: string): Query<
@@ -64,25 +69,25 @@ const userSchema = new Schema<User, UserModel>({
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     set: toLowerCase,
     important: true,
-    inputType: "email"
+    inputType: "email",
   },
   password: {
     type: String,
     required: true,
     select: false,
-    inputType: "password"
+    inputType: "password",
   },
   role: {
     type: String,
     required: true,
     enum: ["root", "admin", "customer"],
     important: true,
-    inputType: "select"
+    inputType: "select",
   },
 });
 
 userSchema.pre("save", function (next) {
-  if(this.password){
+  if (this.password) {
     const salt = crypto.randomBytes(keyLength);
     crypto.scrypt(
       this.password,
@@ -91,12 +96,14 @@ userSchema.pre("save", function (next) {
       scryptOptions,
       (err, derivedKey) => {
         if (err) throw err;
-        this.password = salt.toString("base64") + ":" + derivedKey.toString("base64");
-        next()
+        this.password =
+          salt.toString("base64") + ":" + derivedKey.toString("base64");
+        next();
       }
     );
-  }else {next()}
-  
+  } else {
+    next();
+  }
 });
 
 userSchema.methods.setPassword = async function (password: string) {
@@ -105,9 +112,9 @@ userSchema.methods.setPassword = async function (password: string) {
   });
 };
 
-userSchema.query.byEmail = function (email: string): QueryHelpers {
-  return this.findOne({ email: toLowerCase(email) });
-};
+// userSchema.query.byEmail = function (email: string): QueryHelpers {
+//   return this.findOne({ email: toLowerCase(email) });
+// };
 
 userSchema.static(
   "verifyPassword",
@@ -116,9 +123,11 @@ userSchema.static(
       .find()
       .byEmail(email)
       .select("+password");
-    const [ b64salt, b64hash ] = user ? (user as any).password.split(":") : fakePassword;
-    const salt = Buffer.from(b64salt, "base64")
-    const hash = Buffer.from(b64hash, "base64")
+    const [b64salt, b64hash] = user
+      ? (user as any).password.split(":")
+      : fakePassword;
+    const salt = Buffer.from(b64salt, "base64");
+    const hash = Buffer.from(b64hash, "base64");
     return new Promise<LeanDocument<
       Document<unknown, any, Omit<User, "password">> &
         Omit<User, "password"> & {
