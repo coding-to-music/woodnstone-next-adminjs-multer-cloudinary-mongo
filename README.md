@@ -1,5 +1,7 @@
 # woodnstone-next-adminjs-multer-cloudinary-mongo
 
+Many build errors could not get any of Admin, Frontend or Backend to work. Backend kinda worked.
+
 # 🚀 eCommerce app made with NextJS, AdminJS Multer Cloudinary and MongoDB 🚀
 
 https://github.com/coding-to-music/woodnstone-next-adminjs-multer-cloudinary-mongo
